@@ -1,0 +1,7 @@
+A video game sound generator
+A monkey drumming toy
+A music composer ?
+
+Disclaimer:
+Although the Television Interface Adapter sound chip is awesome, I found it to be a bit too limiting for this project. 
+For this reason I instead used 8-Bit audio at a nice and chunky bitrate.
