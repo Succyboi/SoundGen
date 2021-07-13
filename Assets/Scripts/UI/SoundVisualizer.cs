@@ -32,7 +32,7 @@ public class SoundVisualizer : MonoBehaviour
             display.color = Color.white;
         }
 
-        display.texture = AudioTools.PaintWaveformSpectrum(data, width, height, displayColor);
+        display.texture = AudioTools.PaintWaveformSpectrum(data, width, height, displayColor, display.texture != null ? (Texture2D)display.texture : null);
     }
 
     private void OnAudioFilterRead(float[] data, int channels)

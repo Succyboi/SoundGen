@@ -32,7 +32,7 @@ public class SubSfxGenEditor : Editor
         {
             component.Explosion();
         }
-        if (GUILayout.Button("Jump "))
+        if (GUILayout.Button("Jump"))
         {
             component.Jump();
         }
@@ -42,6 +42,18 @@ public class SubSfxGenEditor : Editor
         {
             component.PlaySfx();
             //clipPreview = AudioTools.PaintWaveformSpectrum(component.source.clip, Mathf.RoundToInt(GUILayoutUtility.GetLastRect().size.x), Mathf.RoundToInt(GUI.skin.label.lineHeight * 2));
+        }
+
+        if (GUILayout.Button("Save"))
+        {
+            if (component.Save())
+            {
+                Debug.Log("Saved succesfully.");
+            }
+            else
+            {
+                Debug.LogError("Could not save.");
+            }
         }
 
         //get waveform

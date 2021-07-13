@@ -9,6 +9,7 @@ public class SubSfxGen : MonoBehaviour
     public int rate = 22050;
 
     [Header("Synthesis")]
+    public BitCrusher crusher;
     public bool quantizePitch;
     public float startPitch = 1000;
     public float endPitch = 1000;
@@ -23,8 +24,51 @@ public class SubSfxGen : MonoBehaviour
     [Range(1, 8)] public int startCrush = 1;
     [Range(1, 8)] public int endCrush = 1;
 
+    [Header("Saving")]
+    public string preSaveName = "SFXO1_";
+
     [HideInInspector] public AudioSource source;
     private LTROController input;
+
+    #region UI Bindings
+
+    public bool QuantizePitch
+    {
+        get
+        {
+            return quantizePitch;
+        }
+        set
+        {
+            quantizePitch = value;
+        }
+    }
+
+    public float StartPitch
+    {
+        get
+        {
+            return startPitch;
+        }
+        set
+        {
+            startPitch = value;
+        }
+    }
+
+    public float EndPitch
+    {
+        get
+        {
+            return endPitch;
+        }
+        set
+        {
+            endPitch = value;
+        }
+    }
+
+    #endregion
 
     private void Start()
     {
@@ -96,6 +140,9 @@ public class SubSfxGen : MonoBehaviour
                 lpf.cutoff = Mathf.Clamp(filterEnv.Run(rate), 0.01f, 1f);
                 data[d] = lpf.Run(data[d]);
             }
+
+            //crush bit depth
+            data[d] = crusher.Run(data[d]);
         }
 
         //do bitcrush
@@ -244,6 +291,33 @@ public class SubSfxGen : MonoBehaviour
 
         //play
         PlaySfx();
+    }
+
+    #endregion
+
+    #region Saving
+
+    public bool Save()
+    {
+        if(source.clip != null)
+        {
+            string downloadPath = KnownFolders.GetPath(KnownFolder.Downloads);
+
+            //find available file name
+            int availableIndex = 0;
+            while (System.IO.File.Exists(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav"))
+            {
+                availableIndex++;
+            }
+
+            SavWav.Save(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav", source.clip);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     #endregion

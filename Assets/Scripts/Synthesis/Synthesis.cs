@@ -7,7 +7,7 @@ using UnityEditor;
 //weird gui stuff
 public static class AudioTools
 {
-    public static Texture2D PaintWaveformSpectrum(float[] clipContents, int width, int height, Color col)
+    public static Texture2D PaintWaveformSpectrum(float[] clipContents, int width, int height, Color col, Texture2D tex = null)
     {
         if (width < 1 || height < 1)
         {
@@ -16,7 +16,11 @@ public static class AudioTools
 
         Color backgroundColor = new Color(0, 0, 0, 0);
 
-        Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        //only create if null
+        if(tex == null)
+        {
+            tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        }
 
         //create thing
         if (clipContents != null)

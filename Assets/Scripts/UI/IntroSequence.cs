@@ -38,7 +38,6 @@ public class IntroSequence : MonoBehaviour
     private IEnumerator IntroRoutine()
     {
         //wait before startup
-        yield return new WaitForSeconds(timeBetweenSlides);
         sfx.Glitch();
 
         //pregame slides
