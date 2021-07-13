@@ -7,46 +7,36 @@ using UnityEditor;
 //weird gui stuff
 public static class AudioTools
 {
-    public static Texture2D PaintWaveformSpectrum(AudioClip clip, int width, int height)
+    public static Texture2D PaintWaveformSpectrum(float[] clipContents, int width, int height, Color col)
     {
         if (width < 1 || height < 1)
         {
             return null;
         }
 
-        Color col = EditorGUIUtility.isProSkin
-                        ? new Color32(194, 194, 194, 255)
-                        : new Color32(56, 56, 56, 255);
+        Color backgroundColor = new Color(0, 0, 0, 0);
 
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
-
-        //get contents from array
-        float[] clipContents = new float[clip.samples];
-        clip.GetData(clipContents, 0);
 
         //create thing
         if (clipContents != null)
         {
+            //condense clip contents
             float[] waveform = new float[width];
-            int packSize = (clipContents.Length / width) + 1;
-            int s = 0;
-            for (int i = 0; i < clipContents.Length; i += packSize)
+            for (int w = 0; w < waveform.Length; w++)
             {
-                waveform[s] = Mathf.Abs(clipContents[i]);
-                s++;
+                waveform[w] = clipContents[Mathf.RoundToInt((float)w / waveform.Length * (clipContents.Length - 1))];
             }
 
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Color backgroundColor = new Color(0, 0, 0, 0);
-
                     tex.SetPixel(x, y, backgroundColor);
                 }
             }
 
-            for (int x = 0; x < waveform.Length; x++)
+            for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y <= waveform[x] * ((float)height * .75f); y++)
                 {
@@ -61,11 +51,7 @@ public static class AudioTools
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Color backgroundColor = EditorGUIUtility.isProSkin
-                    ? new Color32(56, 56, 56, 255)
-                    : new Color32(194, 194, 194, 255);
-
-                    tex.SetPixel(x, y, backgroundColor);
+                    tex.SetPixel(x, y, col);
                 }
             }
         }

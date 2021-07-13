@@ -22,6 +22,7 @@ public class IntroSequence : MonoBehaviour
     [Header("Misc References")]
     public GameObject[] pregameSlides;
     public GameObject afterIntro;
+    public Selectable firstSelectable;
     public LTROController input;
     public SubSfxGen sfx;
 
@@ -38,7 +39,7 @@ public class IntroSequence : MonoBehaviour
     {
         //wait before startup
         yield return new WaitForSeconds(timeBetweenSlides);
-        sfx.GlitchPluck();
+        sfx.Glitch();
 
         //pregame slides
         for (int p = 0; p < pregameSlides.Length; p++)
@@ -49,7 +50,7 @@ public class IntroSequence : MonoBehaviour
 
             //wait
             yield return new WaitForSeconds(timeBetweenSlides);
-            sfx.GlitchPluck();
+            sfx.Glitch();
         }
 
         //start menu
@@ -63,7 +64,7 @@ public class IntroSequence : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        sfx.GlitchPluck();
+        sfx.Glitch();
 
         //loading screen
         startMenu.SetActive(false);
@@ -86,6 +87,7 @@ public class IntroSequence : MonoBehaviour
         //finally enter the application
         LoadingScreen.SetActive(false);
         afterIntro.SetActive(true);
+        firstSelectable.Select();
 
         yield return null;
     }

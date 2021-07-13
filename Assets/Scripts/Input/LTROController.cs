@@ -59,15 +59,15 @@ public class LTROController : MonoBehaviour
 
         //buttons
         startDown = Keyboard.current[StartKey].wasPressedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.Start].wasPressedThisFrame : false);
-        startDown = Keyboard.current[StartKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.Start].isPressed : false);
+        startPressed = Keyboard.current[StartKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.Start].isPressed : false);
         startUp = Keyboard.current[StartKey].wasReleasedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.Start].wasReleasedThisFrame : false);
 
         aDown = Keyboard.current[AKey].wasPressedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.A].wasPressedThisFrame : false);
-        aDown = Keyboard.current[AKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.A].isPressed : false);
+        aPressed = Keyboard.current[AKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.A].isPressed : false);
         aUp = Keyboard.current[AKey].wasReleasedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.A].wasReleasedThisFrame : false);
 
         bDown = Keyboard.current[BKey].wasPressedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.B].wasPressedThisFrame : false);
-        bDown = Keyboard.current[BKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.B].isPressed : false);
+        bPressed = Keyboard.current[BKey].isPressed || (Gamepad.current != null ? Gamepad.current[GamepadButton.B].isPressed : false);
         bUp = Keyboard.current[BKey].wasReleasedThisFrame || (Gamepad.current != null ? Gamepad.current[GamepadButton.B].wasReleasedThisFrame : false);
     }
 

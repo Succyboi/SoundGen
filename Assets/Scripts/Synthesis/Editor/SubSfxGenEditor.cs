@@ -20,36 +20,40 @@ public class SubSfxGenEditor : Editor
     public override void OnInspectorGUI()
     {
         EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Random"))
+        {
+            component.RandomSound();
+        }
         if (GUILayout.Button("Glitch"))
         {
             component.Glitch();
         }
-        if (GUILayout.Button("Glitch Pluck"))
+        if (GUILayout.Button("Explosion"))
         {
-            component.GlitchPluck();
+            component.Explosion();
         }
-        if (GUILayout.Button("Random Explosion"))
+        if (GUILayout.Button("Jump "))
         {
-            component.RandomExplosion();
+            component.Jump();
         }
         EditorGUILayout.EndHorizontal();
 
         if (GUILayout.Button("Generate"))
         {
             component.PlaySfx();
-            clipPreview = AudioTools.PaintWaveformSpectrum(component.source.clip, Mathf.RoundToInt(GUILayoutUtility.GetLastRect().size.x), Mathf.RoundToInt(GUI.skin.label.lineHeight * 2));
+            //clipPreview = AudioTools.PaintWaveformSpectrum(component.source.clip, Mathf.RoundToInt(GUILayoutUtility.GetLastRect().size.x), Mathf.RoundToInt(GUI.skin.label.lineHeight * 2));
         }
 
         //get waveform
-        if (component.source.clip != null && clipPreview == null)
-        {
-            clipPreview = AudioTools.PaintWaveformSpectrum(component.source.clip, Mathf.RoundToInt(GUILayoutUtility.GetLastRect().size.x), Mathf.RoundToInt(GUI.skin.label.lineHeight * 2));
-        }
-
-        if (clipPreview != null)
-        {
-            //GUILayout.Label(clipPreview);
-        }
+        //if (component.source.clip != null && clipPreview == null)
+        //{
+        //    clipPreview = AudioTools.PaintWaveformSpectrum(component.source.clip, Mathf.RoundToInt(GUILayoutUtility.GetLastRect().size.x), Mathf.RoundToInt(GUI.skin.label.lineHeight * 2));
+        //}
+        //
+        //if (clipPreview != null)
+        //{
+        //    //GUILayout.Label(clipPreview);
+        //}
 
         base.OnInspectorGUI();
     }
