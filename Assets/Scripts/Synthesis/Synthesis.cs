@@ -1,6 +1,80 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEditor;
+
+//weird gui stuff
+public static class AudioTools
+{
+    public static Texture2D PaintWaveformSpectrum(AudioClip clip, int width, int height)
+    {
+        if (width < 1 || height < 1)
+        {
+            return null;
+        }
+
+        Color col = EditorGUIUtility.isProSkin
+                        ? new Color32(194, 194, 194, 255)
+                        : new Color32(56, 56, 56, 255);
+
+        Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+        //get contents from array
+        float[] clipContents = new float[clip.samples];
+        clip.GetData(clipContents, 0);
+
+        //create thing
+        if (clipContents != null)
+        {
+            float[] waveform = new float[width];
+            int packSize = (clipContents.Length / width) + 1;
+            int s = 0;
+            for (int i = 0; i < clipContents.Length; i += packSize)
+            {
+                waveform[s] = Mathf.Abs(clipContents[i]);
+                s++;
+            }
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Color backgroundColor = new Color(0, 0, 0, 0);
+
+                    tex.SetPixel(x, y, backgroundColor);
+                }
+            }
+
+            for (int x = 0; x < waveform.Length; x++)
+            {
+                for (int y = 0; y <= waveform[x] * ((float)height * .75f); y++)
+                {
+                    tex.SetPixel(x, (height / 2) + y, col);
+                    tex.SetPixel(x, (height / 2) - y, col);
+                }
+            }
+        }
+        else
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Color backgroundColor = EditorGUIUtility.isProSkin
+                    ? new Color32(56, 56, 56, 255)
+                    : new Color32(194, 194, 194, 255);
+
+                    tex.SetPixel(x, y, backgroundColor);
+                }
+            }
+        }
+
+        tex.Apply();
+
+        return tex;
+    }
+}
 
 [System.Serializable]
 public class BitCrusher
@@ -78,6 +152,11 @@ public class MorphOsc
     {
         return ((pos * (2 * freq / rate)) % 2) - 1 >= 0 ? 1 : -1;
     }
+
+    public void Reset()
+    {
+        pos = 0;
+    }
 }
 
 [System.Serializable]
@@ -113,17 +192,72 @@ public class Envelope
             //increment to keep track of position
             pos++;
 
-            return curve.Evaluate(curvePos);
+            return Mathf.Clamp01(curve.Evaluate(curvePos));
         }
         else
         {
-            return curve.Evaluate(1);
+            return Mathf.Clamp01(curve.Evaluate(1));
         }
     }
 
-    public void Trigger()
+    public virtual void Trigger()
     {
         pos = 0;
+    }
+}
+
+[System.Serializable]
+public class ASDEnvelope : Envelope
+{
+    [Header("ASD")]
+    public float attack;
+    public float sustain;
+    public float decay;
+
+    public override void Trigger()
+    {
+        //set duration
+        duration = attack + sustain + decay;
+
+        //correct if curve is weird
+        if(curve.keys.Length != 4)
+        {
+            //remove all
+            for(int k = 0; k < curve.keys.Length; k++)
+            {
+                curve.RemoveKey(k);
+            }
+
+            //add keys
+            for (int k = 0; k < 4; k++)
+            {
+                curve.AddKey(k, 0);
+            }
+        }
+
+        //get keys from curve
+        Keyframe[] keys = curve.keys;
+
+        //start
+        keys[0].value = 0f;
+
+        //attack
+        keys[1].time = attack / duration;
+        keys[1].value = 1f;
+
+        //sustain
+        keys[2].time = (attack + sustain) / duration;
+        keys[2].value = 1f;
+
+        //decay
+        keys[3].time = (attack + sustain + decay) / duration;
+        keys[3].value = 0f;
+
+        //assign back to curve
+        curve.keys = keys;
+
+        //base trigger
+        base.Trigger();
     }
 }
 
@@ -148,6 +282,11 @@ public class Lfo
         pos++;
 
         return curve.Evaluate(curvePos);
+    }
+
+    public void Reset()
+    {
+        pos = 0;
     }
 }
 
@@ -232,6 +371,11 @@ public static class Pitch
         new Scale("Blues", new Note[] { Note.C, Note.Eb, Note.F, Note.Gb, Note.G, Note.Bb }), //blues
         new Scale("Japanese Insen", new Note[] { Note.C, Note.Db, Note.F, Note.G, Note.Bb }) //japanese insen
     };
+
+    public static float QuantizeFrequency(float freq)
+    {
+        return NotesInHertz.OrderBy(n => Mathf.Abs(n - freq)).FirstOrDefault();
+    }
 
     public static float[] NotesInHertz = new float[]
     {
