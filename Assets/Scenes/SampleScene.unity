@@ -890,6 +890,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!83 &969749531
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 623c0901-764a-45dc-a943-15640d6d7a4e
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 8000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1036966227
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,8 +949,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 8000
-  startPitch: 1006.6091
-  endPitch: 819.0144
+  quantizePitch: 1
+  startPitch: 146.8324
+  endPitch: 659.2551
   pitchLfo:
     curve:
       serializedVersion: 2
@@ -957,9 +986,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    duration: 0.077636294
-  pitchLfoAmount: 0
-  pitchLfoSpeedHz: 12.880573
+    duration: 0.07985451
+  pitchLfoAmount: 425.7034
+  pitchLfoSpeedHz: 12.522775
   volumeEnv:
     curve:
       serializedVersion: 2
@@ -974,7 +1003,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5510144
+        time: 0.005854598
         value: 1
         inSlope: 0
         outSlope: 0
@@ -983,7 +1012,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.67984354
+        time: 0.47211826
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1003,13 +1032,13 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    duration: 1.4568489
-    attack: 0.80274475
-    sustain: 0.18768457
-    decay: 0.46641952
+    duration: 1.7080592
+    attack: 0.01
+    sustain: 0.7964059
+    decay: 0.90165323
   osc:
     volume: 0.5
-    morph: 0.46495193
+    morph: 0.70964247
     sineMorph:
       serializedVersion: 2
       m_Curve:
@@ -1160,9 +1189,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  useLpf: 0
+  useLpf: 1
   lpf:
-    cutoff: 0
+    cutoff: 0.09973776
     resonance: 0.5
     distortion: 0
   filterEnv:
@@ -1179,7 +1208,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.027777776
+        time: 0.005322694
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1188,7 +1217,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.30555555
+        time: 0.53483385
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1197,7 +1226,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.99999994
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1208,10 +1237,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    duration: 0.36
+    duration: 1.8787478
     attack: 0.01
-    sustain: 0.1
-    decay: 0.25
+    sustain: 0.994818
+    decay: 0.8739298
   source: {fileID: 1036966230}
 --- !u!4 &1036966229
 Transform:
@@ -1237,7 +1266,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 969749531}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
