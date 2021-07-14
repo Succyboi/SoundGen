@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class SubSfxGen : MonoBehaviour
@@ -28,205 +29,10 @@ public class SubSfxGen : MonoBehaviour
     public string preSaveName = "SFXO1_";
 
     [HideInInspector] public AudioSource source;
-    private LTROController input;
-
-    #region UI Bindings
-
-    public int Wave
-    {
-        set
-        {
-            osc.morph = value / 4f;
-        }
-        get
-        {
-            return Mathf.RoundToInt(osc.morph * 4f);
-        }
-    }
-
-    public bool QuantizePitch
-    {
-        get
-        {
-            return quantizePitch;
-        }
-        set
-        {
-            quantizePitch = value;
-        }
-    }
-
-    public float StartPitch
-    {
-        get
-        {
-            return startPitch;
-        }
-        set
-        {
-            startPitch = value;
-        }
-    }
-
-    public float EndPitch
-    {
-        get
-        {
-            return endPitch;
-        }
-        set
-        {
-            endPitch = value;
-        }
-    }
-
-    public float PitchLfoAmount
-    {
-        get
-        {
-            return pitchLfoAmount;
-        }
-        set
-        {
-            pitchLfoAmount = value;
-        }
-    }
-
-    public float PitchLfoSpeedHz
-    {
-        get
-        {
-            return pitchLfoSpeedHz;
-        }
-        set
-        {
-            pitchLfoSpeedHz = value;
-        }
-    }
-
-    public float VolumeAttack
-    {
-        get
-        {
-            return volumeEnv.attack;
-        }
-        set
-        {
-            volumeEnv.attack = value;
-        }
-    }
-
-    public float VolumeSustain
-    {
-        get
-        {
-            return volumeEnv.sustain;
-        }
-        set
-        {
-            volumeEnv.sustain = value;
-        }
-    }
-
-    public float VolumeDecay
-    {
-        get
-        {
-            return volumeEnv.decay;
-        }
-        set
-        {
-            volumeEnv.decay = value;
-        }
-    }
-
-    public bool UseFilter
-    {
-        get
-        {
-            return useLpf;
-        }
-        set
-        {
-            useLpf = value;
-        }
-    }
-
-    public float FilterAttack
-    {
-        get
-        {
-            return filterEnv.attack;
-        }
-        set
-        {
-            filterEnv.attack = value;
-        }
-    }
-
-    public float FilterSustain
-    {
-        get
-        {
-            return filterEnv.sustain;
-        }
-        set
-        {
-            filterEnv.sustain = value;
-        }
-    }
-
-    public float FilterDecay
-    {
-        get
-        {
-            return filterEnv.decay;
-        }
-        set
-        {
-            filterEnv.decay = value;
-        }
-    }
-
-    public float StartCrush
-    {
-        get
-        {
-            return startCrush;
-        }
-        set
-        {
-            startCrush = Mathf.RoundToInt(value);
-        }
-    }
-
-    public float EndCrush
-    {
-        get
-        {
-            return endCrush;
-        }
-        set
-        {
-            endCrush = Mathf.RoundToInt(value);
-        }
-    }
-
-    #endregion
 
     private void Start()
     {
         source = GetComponent<AudioSource>();
-        input = FindObjectOfType<LTROController>();
-    }
-
-    private void Update()
-    {
-        //start to play sound
-        if (input.startDown)
-        {
-            PlaySfx();
-        }
     }
 
     public void PlaySfx()
@@ -249,6 +55,9 @@ public class SubSfxGen : MonoBehaviour
 
         source.clip = GenerateSfx();
         source.Play();
+
+        //update UI
+        UpdateUI();
     }
 
     public AudioClip GenerateSfx()
@@ -438,6 +247,234 @@ public class SubSfxGen : MonoBehaviour
     }
 
     #endregion
+
+    #region UI Bindings
+
+    //update all the values in the ui to make sense with what's happening in the component
+    public void UpdateUI()
+    {
+        WaveDropdown.value = Wave;
+
+        QuantizePitchToggle.isOn = QuantizePitch;
+
+        StartPitchSlider.value = StartPitch;
+        EndPitchSlider.value = EndPitch;
+
+        PitchLfoAmountSlider.value = PitchLfoAmount;
+        PitchLfoSpeedHzSlider.value = PitchLfoSpeedHz;
+
+        VolumeAttackSlider.value = VolumeAttack;
+        VolumeSustainSlider.value = VolumeSustain;
+        VolumeDecaySlider.value = VolumeDecay;
+
+        UseFilterToggle.isOn = UseFilter;
+
+        FilterAttackSlider.value = FilterAttack;
+        FilterSustainSlider.value = FilterSustain;
+        FilterDecaySlider.value = FilterDecay;
+
+        StartCrushSlider.value = StartCrush;
+        EndCrushSlider.value = EndCrush;
+    }
+
+    [Header("UI Bindings")]
+    public Dropdown WaveDropdown;
+    public int Wave
+    {
+        set
+        {
+            osc.morph = value / 4f;
+        }
+        get
+        {
+            return Mathf.RoundToInt(osc.morph * 4f);
+        }
+    }
+
+    public Toggle QuantizePitchToggle;
+    public bool QuantizePitch
+    {
+        get
+        {
+            return quantizePitch;
+        }
+        set
+        {
+            quantizePitch = value;
+        }
+    }
+
+    public Slider StartPitchSlider;
+    public float StartPitch
+    {
+        get
+        {
+            return startPitch;
+        }
+        set
+        {
+            startPitch = value;
+        }
+    }
+
+    public Slider EndPitchSlider;
+    public float EndPitch
+    {
+        get
+        {
+            return endPitch;
+        }
+        set
+        {
+            endPitch = value;
+        }
+    }
+
+    public Slider PitchLfoAmountSlider;
+    public float PitchLfoAmount
+    {
+        get
+        {
+            return pitchLfoAmount;
+        }
+        set
+        {
+            pitchLfoAmount = value;
+        }
+    }
+
+    public Slider PitchLfoSpeedHzSlider;
+    public float PitchLfoSpeedHz
+    {
+        get
+        {
+            return pitchLfoSpeedHz;
+        }
+        set
+        {
+            pitchLfoSpeedHz = value;
+        }
+    }
+
+    public Slider VolumeAttackSlider;
+    public float VolumeAttack
+    {
+        get
+        {
+            return volumeEnv.attack;
+        }
+        set
+        {
+            volumeEnv.attack = value;
+        }
+    }
+
+    public Slider VolumeSustainSlider;
+    public float VolumeSustain
+    {
+        get
+        {
+            return volumeEnv.sustain;
+        }
+        set
+        {
+            volumeEnv.sustain = value;
+        }
+    }
+
+    public Slider VolumeDecaySlider;
+    public float VolumeDecay
+    {
+        get
+        {
+            return volumeEnv.decay;
+        }
+        set
+        {
+            volumeEnv.decay = value;
+        }
+    }
+
+    public Toggle UseFilterToggle;
+    public bool UseFilter
+    {
+        get
+        {
+            return useLpf;
+        }
+        set
+        {
+            useLpf = value;
+        }
+    }
+
+    public Slider FilterAttackSlider;
+    public float FilterAttack
+    {
+        get
+        {
+            return filterEnv.attack;
+        }
+        set
+        {
+            filterEnv.attack = value;
+        }
+    }
+
+    public Slider FilterSustainSlider;
+    public float FilterSustain
+    {
+        get
+        {
+            return filterEnv.sustain;
+        }
+        set
+        {
+            filterEnv.sustain = value;
+        }
+    }
+
+    public Slider FilterDecaySlider;
+    public float FilterDecay
+    {
+        get
+        {
+            return filterEnv.decay;
+        }
+        set
+        {
+            filterEnv.decay = value;
+        }
+    }
+
+    public Slider StartCrushSlider;
+    public float StartCrush
+    {
+        get
+        {
+            return startCrush;
+        }
+        set
+        {
+            startCrush = Mathf.RoundToInt(value);
+        }
+    }
+
+    public Slider EndCrushSlider;
+    public float EndCrush
+    {
+        get
+        {
+            return endCrush;
+        }
+        set
+        {
+            endCrush = Mathf.RoundToInt(value);
+        }
+    }
+
+    #endregion
+
 
     #region Saving
 

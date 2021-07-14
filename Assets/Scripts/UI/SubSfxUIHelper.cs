@@ -17,6 +17,15 @@ public class SubSfxUIHelper : MonoBehaviour
         sfx = FindObjectOfType<SubSfxGen>();
     }
 
+    private void Update()
+    {
+        //start to play sound
+        if (input.bDown)
+        {
+            sfx.PlaySfx();
+        }
+    }
+
     public void Save()
     {
         StartCoroutine(SaveRoutine());
