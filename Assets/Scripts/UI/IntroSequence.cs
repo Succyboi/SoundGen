@@ -87,6 +87,7 @@ public class IntroSequence : MonoBehaviour
         LoadingScreen.SetActive(false);
         afterIntro.SetActive(true);
         firstSelectable.Select();
+        NotificationSounds.instance.PlaySound(NotificationSound.Good);
 
         yield return null;
     }

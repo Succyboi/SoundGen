@@ -74,7 +74,7 @@ public class BitCrusher
     public float Run(float sampleIn)
     {
         //apply bit depth
-        return Mathf.Round(sampleIn * bitDepth) / bitDepth;
+        return Mathf.Round(sampleIn * bitDepth * 2) / (bitDepth * 2);
     }
 }
 

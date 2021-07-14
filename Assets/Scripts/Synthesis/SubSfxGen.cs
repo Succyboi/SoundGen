@@ -32,6 +32,18 @@ public class SubSfxGen : MonoBehaviour
 
     #region UI Bindings
 
+    public int Wave
+    {
+        set
+        {
+            osc.morph = value / 4f;
+        }
+        get
+        {
+            return Mathf.RoundToInt(osc.morph * 4f);
+        }
+    }
+
     public bool QuantizePitch
     {
         get
@@ -65,6 +77,138 @@ public class SubSfxGen : MonoBehaviour
         set
         {
             endPitch = value;
+        }
+    }
+
+    public float PitchLfoAmount
+    {
+        get
+        {
+            return pitchLfoAmount;
+        }
+        set
+        {
+            pitchLfoAmount = value;
+        }
+    }
+
+    public float PitchLfoSpeedHz
+    {
+        get
+        {
+            return pitchLfoSpeedHz;
+        }
+        set
+        {
+            pitchLfoSpeedHz = value;
+        }
+    }
+
+    public float VolumeAttack
+    {
+        get
+        {
+            return volumeEnv.attack;
+        }
+        set
+        {
+            volumeEnv.attack = value;
+        }
+    }
+
+    public float VolumeSustain
+    {
+        get
+        {
+            return volumeEnv.sustain;
+        }
+        set
+        {
+            volumeEnv.sustain = value;
+        }
+    }
+
+    public float VolumeDecay
+    {
+        get
+        {
+            return volumeEnv.decay;
+        }
+        set
+        {
+            volumeEnv.decay = value;
+        }
+    }
+
+    public bool UseFilter
+    {
+        get
+        {
+            return useLpf;
+        }
+        set
+        {
+            useLpf = value;
+        }
+    }
+
+    public float FilterAttack
+    {
+        get
+        {
+            return filterEnv.attack;
+        }
+        set
+        {
+            filterEnv.attack = value;
+        }
+    }
+
+    public float FilterSustain
+    {
+        get
+        {
+            return filterEnv.sustain;
+        }
+        set
+        {
+            filterEnv.sustain = value;
+        }
+    }
+
+    public float FilterDecay
+    {
+        get
+        {
+            return filterEnv.decay;
+        }
+        set
+        {
+            filterEnv.decay = value;
+        }
+    }
+
+    public float StartCrush
+    {
+        get
+        {
+            return startCrush;
+        }
+        set
+        {
+            startCrush = Mathf.RoundToInt(value);
+        }
+    }
+
+    public float EndCrush
+    {
+        get
+        {
+            return endCrush;
+        }
+        set
+        {
+            endCrush = Mathf.RoundToInt(value);
         }
     }
 
