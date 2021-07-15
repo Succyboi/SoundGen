@@ -23,13 +23,104 @@
 //
 //  derived from Gregorio Zanon's script
 //  http://forum.unity3d.com/threads/119295-Writing-AudioListener.GetOutputData-to-wav-problem?p=806734&viewfull=1#post806734
+//
+// Modified by Pelle Bruinsma
 
 using System;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 
 public static class SavWav {
+
+    #region Browswer specific
+
+	//WARNING: This code is absolute trash and I really do not give a damn. Sorry.
+	public static byte[] ClipToWavData(AudioClip clip)
+    {
+		//convert data
+		float[] samples = new float[clip.samples];
+
+		clip.GetData(samples, 0);
+
+		short[] intData = new short[samples.Length];
+		//converting in 2 float[] steps to Int16[], //then Int16[] to Byte[]
+
+		byte[] bytesData = new byte[samples.Length * 2];
+		//bytesData array is twice the size of
+		//dataSource array because a float converted in Int16 is 2 bytes.
+
+		int rescaleFactor = 32767; //to convert float to Int16
+
+		for (int i = 0; i < samples.Length; i++)
+		{
+			intData[i] = (short)(samples[i] * rescaleFactor);
+			byte[] byteArr = new byte[2];
+			byteArr = BitConverter.GetBytes(intData[i]);
+			byteArr.CopyTo(bytesData, i * 2);
+		}
+
+		List<byte> data = new List<byte>();
+
+		//add header (OFFSET IS ADVANCED BY LENGTH ON REPLACE FUNCTION)
+		var hz = clip.frequency;
+		var channels = clip.channels;
+		int sampleLength = clip.samples;
+
+		byte[] riff = System.Text.Encoding.UTF8.GetBytes("RIFF");
+		data.AddRange(riff, 4);
+
+		byte[] chunkSize = BitConverter.GetBytes(bytesData.Length - 8);
+		data.AddRange(chunkSize, 4);
+
+		byte[] wave = System.Text.Encoding.UTF8.GetBytes("WAVE");
+		data.AddRange(wave, 4);
+
+		byte[] fmt = System.Text.Encoding.UTF8.GetBytes("fmt ");
+		data.AddRange(fmt, 4);
+
+		byte[] subChunk1 = BitConverter.GetBytes(16);
+		data.AddRange(subChunk1, 4);
+
+		ushort one = 1;
+
+		byte[] audioFormat = BitConverter.GetBytes(one);
+		data.AddRange(audioFormat, 2);
+
+		byte[] numChannels = BitConverter.GetBytes(channels);
+		data.AddRange(numChannels, 2);
+
+		byte[] sampleRate = BitConverter.GetBytes(hz);
+		data.AddRange(sampleRate, 4);
+
+		byte[] byteRate = BitConverter.GetBytes(hz * channels * 2); // sampleRate * bytesPerSample*number of channels, here 44100*2*2
+		data.AddRange(byteRate, 4);
+
+		ushort blockAlign = (ushort)(channels * 2);
+		data.AddRange(BitConverter.GetBytes(blockAlign), 2);
+
+		ushort bps = 16;
+		byte[] bitsPerSample = BitConverter.GetBytes(bps);
+		data.AddRange(bitsPerSample, 2);
+
+		byte[] datastring = System.Text.Encoding.UTF8.GetBytes("data");
+		data.AddRange(datastring, 4);
+
+		byte[] subChunk2 = BitConverter.GetBytes(sampleLength * channels * 2);
+		data.AddRange(subChunk2, 4);
+
+		data.AddRange(bytesData);
+
+		return data.ToArray();
+	}
+
+	public static void AddRange(this List<byte> data, byte[] toAdd, int length)
+    {
+		data.AddRange(toAdd.Take(length).ToArray());
+    }
+
+	#endregion
 
 	const int HEADER_SIZE = 44;
 

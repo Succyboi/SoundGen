@@ -35,10 +35,35 @@ public class SubSfxUIHelper : MonoBehaviour
     {
         savedText.transform.parent.gameObject.SetActive(true);
 
-        //notification
-        bool saveSuccessful = sfx.Save();
-        savedText.text = saveSuccessful ? "Saved to downloads succesfully!" : "Could not save. Sorry...";
-        NotificationSounds.instance.PlaySound(saveSuccessful ? NotificationSound.Good : NotificationSound.Bad);
+        switch (Application.platform)
+        {
+            //desktop
+            case RuntimePlatform.WindowsEditor:
+            case RuntimePlatform.LinuxEditor:
+            case RuntimePlatform.OSXEditor:
+            case RuntimePlatform.WindowsPlayer:
+            case RuntimePlatform.LinuxPlayer:
+            case RuntimePlatform.OSXPlayer:
+                //notification
+                bool saveSuccessful = sfx.Save();
+                savedText.text = saveSuccessful ? "Saved to downloads succesfully!" : "Could not save. Sorry...";
+                NotificationSounds.instance.PlaySound(saveSuccessful ? NotificationSound.Good : NotificationSound.Bad);
+                break;
+
+            //web
+            case RuntimePlatform.WebGLPlayer:
+                //start download and wait for completion
+                sfx.Download();
+                yield return new WaitUntil(() => sfx.downloadSuccesful);
+                savedText.text = "Saved to downloads succesfully!";
+                NotificationSounds.instance.PlaySound(NotificationSound.Good);
+                break;
+
+            //default to false
+            default:
+                break;
+        }
+
 
         yield return new WaitForSeconds(savedTextVisibilityTime);
 

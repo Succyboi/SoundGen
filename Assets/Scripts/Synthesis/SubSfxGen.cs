@@ -283,7 +283,7 @@ public class SubSfxGen : MonoBehaviour
     {
         set
         {
-            osc.morph = value / 4f;
+            osc.morph = Mathf.Clamp01(value / 4f);
         }
         get
         {
@@ -475,7 +475,6 @@ public class SubSfxGen : MonoBehaviour
 
     #endregion
 
-
     #region Saving
 
     public bool Save()
@@ -491,7 +490,7 @@ public class SubSfxGen : MonoBehaviour
                 availableIndex++;
             }
 
-            SavWav.Save(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav", source.clip);
+            System.IO.File.WriteAllBytes(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav", SavWav.ClipToWavData(source.clip));
 
             return true;
         }
@@ -500,6 +499,26 @@ public class SubSfxGen : MonoBehaviour
             return false;
         }
     }
+
+    //browser only
+    [System.Runtime.InteropServices.DllImport("__Internal")]
+    private static extern void DownloadFile(string gameObjectName, string methodName, string filename, byte[] byteArray, int byteArraySize);
+    [HideInInspector] public bool downloadSuccesful = false;
+
+    public void Download()
+    {
+        //"download" file
+        byte[] soundData = SavWav.ClipToWavData(source.clip);
+        DownloadFile(gameObject.name, "OnFileDownload", preSaveName.Remove(preSaveName.Length - 1) + ".wav", soundData, soundData.Length);
+    }
+
+    public void OnDownload()
+    {
+        downloadSuccesful = true;
+    }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+#endif
 
     #endregion
 }
