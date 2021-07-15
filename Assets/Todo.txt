@@ -1,5 +1,5 @@
 Description:
-SfxO-1 is a gnarly LoFi sound generator made for the LTRO-1 fictional console.
+A gnarly LoFi sound generator for the LTRO-1
 
 A video game sound generator
 A monkey drumming toy

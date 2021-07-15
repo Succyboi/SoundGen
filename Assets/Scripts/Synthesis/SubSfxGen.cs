@@ -28,6 +28,9 @@ public class SubSfxGen : MonoBehaviour
     [Header("Saving")]
     public string preSaveName = "SFXO1_";
 
+    [Header("Misc")]
+    public SoundVisualizer soundVisualizer;
+
     [HideInInspector] public AudioSource source;
 
     private void Start()
@@ -53,7 +56,13 @@ public class SubSfxGen : MonoBehaviour
 #endif
         }
 
+        //generate
         source.clip = GenerateSfx();
+
+        //visualize
+        soundVisualizer.AddToBuffer(source.clip);
+
+        //play
         source.Play();
 
         //update UI
@@ -170,7 +179,7 @@ public class SubSfxGen : MonoBehaviour
         volumeEnv.decay = Random.Range(0.01f, 1f);
 
         //randomize osc morph
-        osc.morph = Random.value;
+        Wave = Random.Range(0, 4);
 
         //randomize filter env and use
         useLpf = Random.value > 0.5f;
@@ -196,7 +205,7 @@ public class SubSfxGen : MonoBehaviour
         volumeEnv.decay = volumeEnv.sustain < 0.1f ? Random.Range(0.01f, 1f) : Random.Range(1f, 2f);
 
         //randomize osc morph
-        osc.morph = 1;
+        Wave = 3;
 
         //randomize filter env and use
         useLpf = true;
@@ -233,7 +242,7 @@ public class SubSfxGen : MonoBehaviour
         volumeEnv.decay = Random.Range(0.25f, 0.75f);
 
         //randomize osc morph
-        osc.morph = Random.Range(0, 0.75f);
+        Wave = Random.Range(0, 3);
 
         //randomize filter env and use
         useLpf = false;
@@ -287,7 +296,7 @@ public class SubSfxGen : MonoBehaviour
         }
         get
         {
-            return Mathf.RoundToInt(osc.morph * 4f);
+            return Mathf.RoundToInt(osc.morph * 4);
         }
     }
 

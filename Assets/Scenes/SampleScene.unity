@@ -2649,6 +2649,7 @@ GameObject:
   - component: {fileID: 899654800}
   - component: {fileID: 899654802}
   - component: {fileID: 899654801}
+  - component: {fileID: 899654803}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2710,6 +2711,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899654799}
   m_CullTransparentMesh: 1
+--- !u!114 &899654803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd85362cfe72b8042bd90a6dbe58527f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: {fileID: 899654801}
+  displayColor: {r: 0.49411765, g: 0.44313726, b: 0.52156866, a: 1}
+  displaySize: 1
 --- !u!1 &906484367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,7 +2844,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2901,21 +2916,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd85362cfe72b8042bd90a6dbe58527f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  display: {fileID: 899654801}
-  displayColor: {r: 0.49411765, g: 0.44313726, b: 0.52156866, a: 1}
-  displaySize: 16
 --- !u!1 &1036966227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,6 +3244,7 @@ MonoBehaviour:
   startCrush: 1
   endCrush: 1
   preSaveName: SFXO1_
+  soundVisualizer: {fileID: 899654803}
   source: {fileID: 1036966230}
   WaveDropdown: {fileID: 1496595895}
   QuantizePitchToggle: {fileID: 478316729}
@@ -3260,6 +3261,7 @@ MonoBehaviour:
   FilterDecaySlider: {fileID: 1163585350}
   StartCrushSlider: {fileID: 1096271057}
   EndCrushSlider: {fileID: 1121315027}
+  downloadSuccesful: 0
 --- !u!4 &1036966229
 Transform:
   m_ObjectHideFlags: 0

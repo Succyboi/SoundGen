@@ -15,11 +15,11 @@ C:/Users/spook/Documents/GitHub/SoundGen
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-61852
+55584
 Successfully changed project path to: C:/Users/spook/Documents/GitHub/SoundGen
 C:/Users/spook/Documents/GitHub/SoundGen
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 38.61 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 38.39 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.9f1 (7a790e367ab3)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/2021.1.9f1/Editor/Data/Resources/UnitySubsystems
@@ -35,5 +35,5 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditors/2021.1.9f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/2021.1.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/UnityEditors/2021.1.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56500
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56904
 Begin MonoManager ReloadAssembly

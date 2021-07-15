@@ -54,8 +54,7 @@ public class SubSfxUIHelper : MonoBehaviour
             case RuntimePlatform.WebGLPlayer:
                 //start download and wait for completion
                 sfx.Download();
-                yield return new WaitUntil(() => sfx.downloadSuccesful);
-                savedText.text = "Saved to downloads succesfully!";
+                savedText.text = "Download will start in a sec!";
                 NotificationSounds.instance.PlaySound(NotificationSound.Good);
                 break;
 
