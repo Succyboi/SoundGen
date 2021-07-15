@@ -57,10 +57,14 @@ public class SubSfxGen : MonoBehaviour
         }
 
         //generate
-        source.clip = GenerateSfx();
+        float[] sfxData = GenerateSfxData();
+        source.clip = GenerateSfx(sfxData);
 
         //visualize
-        soundVisualizer.AddToBuffer(source.clip);
+        if(soundVisualizer != null)
+        {
+            soundVisualizer.AddToBuffer(sfxData, rate);
+        }
 
         //play
         source.Play();
@@ -69,7 +73,9 @@ public class SubSfxGen : MonoBehaviour
         UpdateUI();
     }
 
-    public AudioClip GenerateSfx()
+    #region Generation
+
+    public float[] GenerateSfxData()
     {
         //reset stuff
         volumeEnv.Trigger();
@@ -93,7 +99,7 @@ public class SubSfxGen : MonoBehaviour
             pitch = quantizePitch ? Pitch.QuantizeFrequency(pitch) : pitch;
 
             data[d] = osc.Run(
-                pitch, 
+                pitch,
                 rate) * volumeEnv.Run(rate);
 
             //filter
@@ -129,13 +135,20 @@ public class SubSfxGen : MonoBehaviour
                 data[d + i] = stepValue;
             }
         }
+        return data;
+    }
 
+
+    public AudioClip GenerateSfx(float[] SfxData)
+    {
         //assign data to clip
-        AudioClip generatedClip = AudioClip.Create(System.Guid.NewGuid().ToString(), data.Length, 1, rate, false);
-        generatedClip.SetData(data, 0);
+        AudioClip generatedClip = AudioClip.Create(System.Guid.NewGuid().ToString(), SfxData.Length, 1, rate, false);
+        generatedClip.SetData(SfxData, 0);
 
         return generatedClip;
     }
+
+    #endregion
 
     #region Randomisation
 
@@ -499,7 +512,7 @@ public class SubSfxGen : MonoBehaviour
                 availableIndex++;
             }
 
-            System.IO.File.WriteAllBytes(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav", SavWav.ClipToWavData(source.clip));
+            System.IO.File.WriteAllBytes(downloadPath + "/" + preSaveName + availableIndex.ToString() + ".wav", SavWav.FloatsToWavData(GenerateSfxData(), rate));
 
             return true;
         }
@@ -517,7 +530,7 @@ public class SubSfxGen : MonoBehaviour
     public void Download()
     {
         //"download" file
-        byte[] soundData = SavWav.ClipToWavData(source.clip);
+        byte[] soundData = SavWav.FloatsToWavData(GenerateSfxData(), rate);
         DownloadFile(gameObject.name, "OnFileDownload", preSaveName.Remove(preSaveName.Length - 1) + ".wav", soundData, soundData.Length);
     }
 
@@ -525,9 +538,6 @@ public class SubSfxGen : MonoBehaviour
     {
         downloadSuccesful = true;
     }
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-#endif
 
     #endregion
 }

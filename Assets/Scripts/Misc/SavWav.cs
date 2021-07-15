@@ -37,13 +37,8 @@ public static class SavWav {
     #region Browswer specific
 
 	//WARNING: This code is absolute trash and I really do not give a damn. Sorry.
-	public static byte[] ClipToWavData(AudioClip clip)
+	public static byte[] FloatsToWavData(float[] samples, int rate)
     {
-		//convert data
-		float[] samples = new float[clip.samples];
-
-		clip.GetData(samples, 0);
-
 		short[] intData = new short[samples.Length];
 		//converting in 2 float[] steps to Int16[], //then Int16[] to Byte[]
 
@@ -64,9 +59,9 @@ public static class SavWav {
 		List<byte> data = new List<byte>();
 
 		//add header (OFFSET IS ADVANCED BY LENGTH ON REPLACE FUNCTION)
-		var hz = clip.frequency;
-		var channels = clip.channels;
-		int sampleLength = clip.samples;
+		var hz = rate;
+		var channels = 1;
+		int sampleLength = samples.Length;
 
 		byte[] riff = System.Text.Encoding.UTF8.GetBytes("RIFF");
 		data.AddRange(riff, 4);

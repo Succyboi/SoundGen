@@ -9,9 +9,12 @@ public class UIHelper : MonoBehaviour
 
     private void Start()
     {
-        foreach(Text text in Resources.FindObjectsOfTypeAll<Text>())
+        if(UIFont != null)
         {
-            text.font = UIFont;
+            foreach (Text text in Resources.FindObjectsOfTypeAll<Text>())
+            {
+                text.font = UIFont;
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ public class SoundVisualizer : MonoBehaviour
         buffer.RemoveRange(0, Mathf.Clamp(Mathf.RoundToInt(lastFrequency * Time.deltaTime), 0, buffer.Count));
     }
 
-    public void AddToBuffer(AudioClip clip, bool clear = true)
+    public void AddToBuffer(float[] data, int rate, bool clear = true)
     {
         //clear buffer
         if (clear)
@@ -47,10 +47,8 @@ public class SoundVisualizer : MonoBehaviour
         }
 
         //add
-        float[] data = new float[clip.samples];
-        clip.GetData(data, 0);
         buffer.AddRange(new float[Mathf.RoundToInt(width * displaySize)]); //add blank up front
         buffer.AddRange(data);
-        lastFrequency = clip.frequency;
+        lastFrequency = rate;
     }
 }

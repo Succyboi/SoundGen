@@ -42,7 +42,7 @@ public static class AudioTools
 
             for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y <= waveform[x] * ((float)height * .75f); y++)
+                for (int y = 0; y < waveform[x] * ((float)height * .5f); y++)
                 {
                     tex.SetPixel(x, (height / 2) + y, col);
                     tex.SetPixel(x, (height / 2) - y, col);
@@ -74,7 +74,7 @@ public class BitCrusher
     public float Run(float sampleIn)
     {
         //apply bit depth
-        return Mathf.Round(sampleIn * bitDepth * 2) / (bitDepth * 2);
+        return Mathf.Round(sampleIn * bitDepth) / (bitDepth);
     }
 }
 
