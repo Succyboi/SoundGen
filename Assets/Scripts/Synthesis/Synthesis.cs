@@ -20,6 +20,7 @@ public static class AudioTools
         if(tex == null)
         {
             tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
         }
 
         //create thing

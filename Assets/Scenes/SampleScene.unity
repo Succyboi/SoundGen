@@ -1231,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7937878410988239288, guid: 44de0f59f687b014697d9d3a955ad6ba, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 118.00001
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 7937878410988239288, guid: 44de0f59f687b014697d9d3a955ad6ba, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1414,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 118.00001
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3046,7 +3046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 118.00001
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3997,9 +3997,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WASDKeys: 3f0000003d000000400000003e000000
-  StartKey: 1
-  AKey: 40
-  BKey: 38
+  StartKey: 2
+  AKey: 1
+  BKey: 53
   normalizeMovement: 1
   movementDamp: 0.01
   movement: {x: 0, y: 0}
@@ -4088,7 +4088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 118.00001, y: -86.25}
+  m_AnchoredPosition: {x: 118, y: -86.25}
   m_SizeDelta: {x: 236.00002, y: 60.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1405049396
@@ -4737,7 +4737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 118.00001
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 5551027145381963669, guid: b7f20a4696ec5d14dab4ead393e328f1, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5718,7 +5718,7 @@ MonoBehaviour:
   - {fileID: 1706132639}
   - {fileID: 184354250}
   afterIntro: {fileID: 1857142952}
-  firstSelectable: {fileID: 615549334}
+  firstSelectable: {fileID: 463930441}
   input: {fileID: 1203633939}
   sfx: {fileID: 1036966228}
 --- !u!1001 &1776281113

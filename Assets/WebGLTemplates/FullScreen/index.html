@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unity WebGL Player | WebTest</title>
+    <script src="Build/UnityLoader.js"></script>
+    <style>
+        body{
+          margin: 0;
+          padding: 0;
+          overflow:hidden;
+        }
+        canvas {
+          width: 100%; 
+          height: 100%;
+        }
+        #gameContainer {
+          width: 100%; 
+          height: 100%; 
+          position: absolute;
+        }
+        #fullScreenToggle {
+          width: 100%; 
+          height: 100%; 
+          position: absolute;
+        }
+    </style>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Build.json")
+
+      // Fullscreen
+      var doc = document;
+      var docEl = doc.documentElement;
+      
+      function requestFullscreen () {       
+        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+          requestFullScreen.call(docEl);
+        }
+      }
+
+      function exitFullscreen () {        
+        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+        if(doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement) {
+          cancelFullScreen.call(doc);
+        }
+      }
+
+      window.onload=function(){
+        addFullscreenDiv();
+        
+        document.addEventListener("webkitfullscreenchange", function( event ) {
+          if (document.webkitIsFullScreen == false) {
+            addFullscreenDiv();
+          }
+        });
+
+        function removeFullscreenDiv() {
+          var body = document.getElementsByTagName("BODY")[0]
+          body.removeChild(document.getElementById("fullScreenToggle").parentElement);
+        }
+
+        function addFullscreenDiv() {
+          // create fullscreen div
+          var div = document.createElement('div');
+          var body = document.getElementsByTagName("BODY")[0]
+          body.appendChild(div);
+          div.innerHTML = '<div id="fullScreenToggle"></div>';
+
+          // Add click event listener
+          div.addEventListener("click", function() {
+            requestFullscreen();
+            removeFullscreenDiv();
+          }, false);
+        }
+      }
+
+
+    </script>
+  </head>
+  <body>
+    <div id="gameContainer"></div>
+  </body>
+</html>

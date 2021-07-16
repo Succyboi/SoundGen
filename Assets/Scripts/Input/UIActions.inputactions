@@ -529,7 +529,7 @@
                 {
                     "name": "",
                     "id": "b022901d-7688-4756-b5b8-d3a9720f3dc9",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -551,7 +551,7 @@
                 {
                     "name": "",
                     "id": "09e0431a-d5a1-42cc-acbd-e0d509733050",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/leftAlt",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
