@@ -9,8 +9,9 @@ public class IntroSequence : MonoBehaviour
     public float timeBetweenSlides;
 
     [Header("Start Menu")]
+    public Color[] colors;
     public float startBlinkSpeed;
-    public GameObject startText;
+    public Text startText;
     public GameObject startMenu;
 
     [Header("Loading Screen")]
@@ -57,9 +58,15 @@ public class IntroSequence : MonoBehaviour
         startMenu.SetActive(true);
 
         //wait until start is pressed
+        bool lastToggle = true;
         while (!(input.aDown || input.bDown || input.startDown))
         {
-            startText.SetActive(Time.time % startBlinkSpeed / startBlinkSpeed > 0.5f);
+            if(lastToggle != Time.time % startBlinkSpeed / startBlinkSpeed > 0.5f)
+            {
+                lastToggle = Time.time % startBlinkSpeed / startBlinkSpeed > 0.5f;
+                startText.color = colors[Random.Range(0, colors.Length)];
+            }
+            startText.gameObject.SetActive(Time.time % startBlinkSpeed / startBlinkSpeed > 0.5f);
 
             yield return new WaitForEndOfFrame();
         }

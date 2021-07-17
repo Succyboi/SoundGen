@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4120779470356765353}
   - component: {fileID: 304075024918339303}
+  - component: {fileID: 7225123147243618722}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -133,6 +134,29 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &7225123147243618722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062643596900738769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9370944cc48ff499b4b48cf0de6dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0.5372549, g: 0.25882354, b: 0.24705882, a: 1}
+  - {r: 0.9647059, g: 0.24705882, b: 0.29803923, a: 1}
+  - {r: 0.99215686, g: 0.73333335, b: 0.15294118, a: 1}
+  - {r: 0.5529412, g: 0.5647059, b: 0.18039216, a: 1}
+  - {r: 0.25490198, g: 0.34901962, b: 0.79607844, a: 1}
+  - {r: 0.34901962, g: 0.654902, b: 0.6862745, a: 1}
+  selectables:
+  - {fileID: 3132501811864170348}
+  images: []
+  texts: []
 --- !u!1 &7948697123198546451
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2021.1/staging' branch; Version is '2021.1.9f1 (7a790e367ab3) revision 8026382'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Home; OS build 19041.1083; Version 2004; 64bit' Language: 'en' Physical Memory: 8034 MB
+OS: 'Windows 10 Home; OS build 19041.1110; Version 2004; 64bit' Language: 'en' Physical Memory: 8034 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
@@ -15,11 +15,11 @@ C:/Users/spook/Documents/GitHub/SoundGen
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-63261
+65152
 Successfully changed project path to: C:/Users/spook/Documents/GitHub/SoundGen
 C:/Users/spook/Documents/GitHub/SoundGen
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 37.86 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 36.87 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.9f1 (7a790e367ab3)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/2021.1.9f1/Editor/Data/Resources/UnitySubsystems
@@ -35,5 +35,5 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditors/2021.1.9f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/2021.1.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/UnityEditors/2021.1.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56656
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56600
 Begin MonoManager ReloadAssembly

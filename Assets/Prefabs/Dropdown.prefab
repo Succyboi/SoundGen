@@ -46,6 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740940626478054740}
   - component: {fileID: 4740940626478054741}
+  - component: {fileID: 5045145275344043915}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -122,6 +123,29 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &5045145275344043915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740940626478054743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9370944cc48ff499b4b48cf0de6dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0.5372549, g: 0.25882354, b: 0.24705882, a: 1}
+  - {r: 0.9647059, g: 0.24705882, b: 0.29803923, a: 1}
+  - {r: 0.99215686, g: 0.73333335, b: 0.15294118, a: 1}
+  - {r: 0.5529412, g: 0.5647059, b: 0.18039216, a: 1}
+  - {r: 0.25490198, g: 0.34901962, b: 0.79607844, a: 1}
+  - {r: 0.34901962, g: 0.654902, b: 0.6862745, a: 1}
+  selectables:
+  - {fileID: 4740940626478054741}
+  images: []
+  texts: []
 --- !u!1 &4740940627222619917
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5551027145381963669}
   - component: {fileID: 5551027145381963674}
+  - component: {fileID: 35810533918561277}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -434,6 +459,29 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &35810533918561277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551027145381963668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9370944cc48ff499b4b48cf0de6dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0.5372549, g: 0.25882354, b: 0.24705882, a: 1}
+  - {r: 0.9647059, g: 0.24705882, b: 0.29803923, a: 1}
+  - {r: 0.99215686, g: 0.73333335, b: 0.15294118, a: 1}
+  - {r: 0.5529412, g: 0.5647059, b: 0.18039216, a: 1}
+  - {r: 0.25490198, g: 0.34901962, b: 0.79607844, a: 1}
+  - {r: 0.34901962, g: 0.654902, b: 0.6862745, a: 1}
+  selectables:
+  - {fileID: 5551027145858461822}
+  images: []
+  texts: []
 --- !u!1 &5551027145858461817
 GameObject:
   m_ObjectHideFlags: 0
