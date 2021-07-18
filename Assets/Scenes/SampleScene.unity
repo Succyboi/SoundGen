@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: sfxO-1
+  m_Text: SfxO-1
 --- !u!222 &153322547
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3385,6 +3385,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3457,6 +3458,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66011ebe73c0ef4f9dd855b611456fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  superSize: 16
 --- !u!114 &1004358947 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3132501811864170348, guid: 4602becbff3c91c40be3ea1b9aff3fde, type: 3}
@@ -11638,7 +11652,7 @@ MonoBehaviour:
   resolutions:
   - {x: 240, y: 135}
   - {x: 480, y: 270}
-  - {x: 520, y: 405}
+  - {x: 720, y: 405}
   - {x: 960, y: 540}
   hiddenOnWebGL:
   - {fileID: 851761320}

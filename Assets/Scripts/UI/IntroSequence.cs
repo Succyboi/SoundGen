@@ -59,7 +59,7 @@ public class IntroSequence : MonoBehaviour
 
         //wait until start is pressed
         bool lastToggle = true;
-        while (!(input.aDown || input.bDown || input.startDown))
+        while (!(input.aDown || input.bDown || input.startDown || UnityEngine.InputSystem.Mouse.current.leftButton.isPressed))
         {
             if(lastToggle != Time.time % startBlinkSpeed / startBlinkSpeed > 0.5f)
             {

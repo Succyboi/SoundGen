@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{{{ PRODUCT_NAME }}}</title>
+	<style>
+        @font-face {
+            font-family: 'ProggyTiny';
+            src: url('https://fonts.cdnfonts.com/s/7515/ProggyTinySZ.woff') format('woff');
+        }
+
+		html,
+		body {
+			background: {{{ BACKGROUND_COLOR }}};
+			width: 100%;
+			height: 100%;
+			overflow: visible;
+			padding: 0;
+			margin: 0;
+		}
+
+		div#gameContainer {
+			background: transparent !important;
+			position: absolute;
+		}
+
+		div#gameContainer canvas {
+			position: absolute;
+		}
+
+		div#gameContainer canvas[data-pixel-art="true"] {
+			position: absolute;
+			image-rendering: optimizeSpeed;
+			image-rendering: -webkit-crisp-edges;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -o-crisp-edges;
+			image-rendering: crisp-edges;
+			image-rendering: -webkit-optimize-contrast;
+			image-rendering: optimize-contrast;
+			image-rendering: pixelated;
+			-ms-interpolation-mode: nearest-neighbor;
+		}
+
+        #sizeBar {
+            background: #37313b;
+            font-family: 'ProggyTiny';
+            font-size: 26px;
+            text-align: center;
+            color: #eae1f0;
+            position: absolute;
+            bottom: 0px;
+            height: 36px; /*CHANGE IN JS TOO*/
+            width: 100%;
+            padding: 0;
+            margin: 0;
+
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+
+        #sizeText {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        a {
+            color: #f63f4c;
+        }
+
+        .col0 {
+            color: #89423f;
+        }
+
+        .col1 {
+            color: #f63f4c;
+        }
+
+        .col2 {
+            color: #fdbb27;
+        }
+
+        .col3 {
+            color: #8d902e;
+        }
+
+        .col4 {
+            color: #4159cb;
+        }
+
+        .col5 {
+            color: #59a7af;
+        }
+	</style>
+</head>
+
+<body>
+	<div id="gameContainer">
+		<canvas id="unity-canvas" image-rendering: crisp-edges; image-rendering: pixelated;></canvas>
+		<script src="Build/{{{ LOADER_FILENAME }}}"></script>
+		<script>
+			var originalWidth = {{{ WIDTH }}};
+			var originalHeight = {{{ HEIGHT }}};
+            var gameWidth = originalWidth;
+			var gameHeight = originalHeight;
+			var sizeBarHeight = 36;
+
+			function resizeToRes(x, y) {
+				gameWidth = x;
+				gameHeight = y;
+
+				onResize();
+            }
+
+			createUnityInstance(document.querySelector("#unity-canvas"), {
+				dataUrl: "Build/{{{ DATA_FILENAME }}}",
+				frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+				codeUrl: "Build/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+				memoryUrl: "Build/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+				symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+#endif
+				streamingAssetsUrl: "StreamingAssets",
+				companyName: "{{{ COMPANY_NAME }}}",
+				productName: "{{{ PRODUCT_NAME }}}",
+				productVersion: "{{{ PRODUCT_VERSION }}}",
+            }).then(function (instance) { OnPromise(instance); });
+
+            //dynamic resizing
+            var canvas;
+            var container;
+            function onResize() {
+                var w = gameWidth;
+                var h = gameHeight;
+
+                container.style.width = canvas.style.width = w + "px";
+                container.style.height = canvas.style.height = h + "px";
+                container.style.top = Math.floor((window.innerHeight - sizeBarHeight - h) / 2).clamp(0, 10000000) + "px";
+                container.style.left = Math.floor((window.innerWidth - sizeBarHeight - w) / 2).clamp(0, 10000000) + "px";
+            }
+
+			function OnPromise(instance)
+			{
+                canvas = instance.Module.canvas;
+                container = canvas.parentElement;
+
+                window.addEventListener('resize', onResize);
+                window.addEventListener('load', onResize);
+                onResize();
+            }
+
+            /**
+             * Returns a number whose value is limited to the given range.
+             *
+             * Example: limit the output of this computation to between 0 and 255
+             * (x * 255).clamp(0, 255)
+             *
+             * @param {Number} min The lower boundary of the output range
+             * @param {Number} max The upper boundary of the output range
+             * @returns A number in the range [min, max]
+             * @type Number
+             */
+            Number.prototype.clamp = function (min, max) {
+                return Math.min(Math.max(this, min), max);
+            };
+		</script>
+	</div>
+
+	<div id="sizeBar">
+		<span id="sizeText"><a onclick="resizeToRes(240, 135)" href="javascript:void(0);" class="col0">1x</a> | <a onclick="resizeToRes(480, 270)" href="javascript:void(0);" class="col1">2x</a> | <a onclick="resizeToRes(720, 405)" href="javascript:void(0);" class="col2">3x</a> | <a onclick="resizeToRes(960, 540)" href="javascript:void(0);" class="col3">4x</a></span>
+	</div>
+</body>
+
+</html>

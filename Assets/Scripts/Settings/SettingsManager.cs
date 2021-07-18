@@ -51,7 +51,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SwitchResolution(int resolution)
     {
-        Screen.SetResolution(resolutions[0].x, resolutions[0].y, false);
+        Screen.SetResolution(resolutions[resolution].x, resolutions[resolution].y, false);
     }
 
     public void SwitchBitDepth(int bitDepth)
