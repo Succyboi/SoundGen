@@ -146,6 +146,17 @@
                 container.style.height = canvas.style.height = h + "px";
                 container.style.top = Math.floor((window.innerHeight - sizeBarHeight - h) / 2).clamp(0, 10000000) + "px";
                 container.style.left = Math.floor((window.innerWidth - sizeBarHeight - w) / 2).clamp(0, 10000000) + "px";
+
+                //hide bar if at minimum resolution
+                var bar = document.getElementById("sizeBar");
+                if (window.innerHeight <= 135 && window.innerWidth <= 240)
+                {
+                    bar.style.display = "none";
+                }
+                else
+                {
+                    bar.style.display = "block";
+                }
             }
 
 			function OnPromise(instance)
