@@ -10,7 +10,7 @@ Made in a few days for the very first [LOSPEC JAM 1](https://itch.io/jam/lospec-
 
 # Preview
 
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1089881395&color=%231d1c1f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+You can preview what SfxO-1 sounds like [here](https://soundcloud.com/0xf05f41/sfxo-1-preview).
 
 
 
